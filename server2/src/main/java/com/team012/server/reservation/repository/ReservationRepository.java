@@ -13,8 +13,6 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    Page<Reservation> findByCompanyId(Long id, PageRequest pageRequest);
-
     //미래에 갈 예약 내역
     @Query(value = "select r from Reservation r where r.usersId = :id and r.checkOut >= :date")
     Page<Reservation> findByUsersId(@Param("id") Long id, @Param("date") LocalDate date, Pageable pageable);
@@ -33,5 +31,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     // 게시글 아이디로 예약목록 조회
     List<Reservation> findByPostsId(Long postsId);
+
 
 }
